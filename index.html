@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador do Amor 💜</title>
+  <style>
+    /* ===== RESET ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f8e1f4, #e8d9ff);
+      color: #3a003a;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #a44cc2;
+      margin: 20px 0;
+      text-shadow: 1px 1px 3px rgba(164, 76, 194, 0.2);
+      z-index: 2;
+      position: relative;
+    }
+
+    /* ===== CONTADOR ===== */
+    .contador {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 2;
+      position: relative;
+    }
+
+    .tempo {
+      background: rgba(255, 255, 255, 0.6);
+      border: 2px solid #d9a6ff;
+      border-radius: 20px;
+      padding: 15px;
+      min-width: 80px;
+      box-shadow: 0 4px 10px rgba(164, 76, 194, 0.2);
+    }
+
+    .tempo span {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #a44cc2;
+    }
+
+    .tempo small {
+      font-size: 0.8rem;
+      color: #7a3c94;
+    }
+
+    /* ===== PLAYER ===== */
+    .player {
+      margin: 25px auto;
+      padding: 2px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.103);
+      border: 2px solid #c895f100;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(164, 76, 194, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 280px;
+      z-index: 2;
+      position: relative;
+    }
+
+    .player img {
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(164, 76, 194, 0.3);
+    }
+
+    .player audio {
+      width: 100%;
+    }
+
+    /* ===== BOTÕES DE FUNDO ===== */
+    .opcoes {
+      margin: 20px auto;
+      z-index: 2;
+      position: relative;
+    }
+
+    .opcoes button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #b97df159;
+      color: #fff;
+      font-weight: bold;
+      transition: 0.3s;
+      margin: 0 5px;
+    }
+
+    .opcoes button:hover {
+      background: #a44cc2;
+    }
+
+    /* ===== DECORAÇÃO ===== */
+    .decoracao {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .cora {
+      position: absolute;
+      color: #ff9edb;
+      font-size: 1.5rem;
+      animation: flutuar 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes flutuar {
+      from {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* ===== CANVAS PARTÍCULAS ===== */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      .tempo {
+        min-width: 65px;
+        padding: 10px;
+      }
+      .tempo span {
+        font-size: 1.2rem;
+      }
+      .player {
+        width: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- novo codigo  -->
+
+<!-- HTML: mantenha seu h1 -->
+<h1 id="wave-heading"> ❤ Lavinia, eu te amo há:</h1>
+
+<!-- CSS: animação de onda suave -->
+<style>
+  /* estilo base do título (copie suas regras se já tiver) */
+  #wave-heading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.6rem;      /* ajuste conforme desejar */
+    line-height: 1.1;
+    font-weight: 700; 
+    text-align: center;
+    margin: 1.2rem 0;
+    color: #c486e9ff;
+    display: inline-block;  /* necessário para que transform funcione bem */
+    white-space: nowrap;     /* evita quebra das letras */
+    will-change: transform;  /* ajuda desempenho */
+    z-index: 2;
+    position: relative;
+  }
+
+  /* cada letra vira um span inline-block para animar individualmente */
+  #wave-heading .w-letter {
+    display: inline-block;
+    transform-origin: center;
+    /* animação muito suave: movimento vertical pequeno */
+    animation-name: wave;
+    animation-duration: 2.8s;     /* duração total da onda */
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.42,.0,.58,1); /* suave */
+    /* cada letra receberá um delay via JS para criar o efeito de onda */
+  }
+
+  /* keyframes: subida suave e volta */
+  @keyframes wave {
+    0%   { transform: translateY(0)    rotate(0deg); }
+    25%  { transform: translateY(-4px) rotate(-0.2deg); }
+    50%  { transform: translateY(0)    rotate(0deg); }
+    75%  { transform: translateY(1px)  rotate(0.1deg); }
+    100% { transform: translateY(0)    rotate(0deg); }
+  }
+
+  /* reduz movimento se usuário prefere menos animação */
+  @media (prefers-reduced-motion: reduce) {
+    #wave-heading .w-letter {
+      animation: none;
+    }
+  }
+
+  /* opcional: suavizar espaçamento visual entre letras */
+  #wave-heading .w-letter + .w-letter { margin-left: 0.02em; }
+</style>
+
+<!-- JS: transforma o texto em spans e aplica delays em cascata -->
+<script>
+  (function createWave() {
+    const h = document.getElementById('wave-heading');
+    if (!h) return;
+
+    // pega o texto bruto (mantemos emojis e espaços)
+    const raw = h.textContent.trim();
+    // limpa e cria fragmento com spans por caractere
+    h.innerHTML = ''; // esvazia
+    const frag = document.createDocumentFragment();
+
+    // configuração da onda
+    const totalDuration = 2.8; // segundos (deve bater com animation-duration CSS)
+    const waveLength = 0.9;    // fração do total que a onda percorre (0..1)
+    const stagger = 0.06;      // atraso entre letras em segundos (ajuste fino)
+
+    for (let i = 0; i < raw.length; i++) {
+      const ch = raw[i];
+      const span = document.createElement('span');
+      span.className = 'w-letter';
+      // preserva espaços visualmente
+      if (ch === ' ') {
+        span.innerHTML = '&nbsp;';
+      } else {
+        span.textContent = ch;
+      }
+
+      // calcular delay: centraliza a onda no meio das letras
+      const center = (raw.length - 1) / 2;
+      const distanceFromCenter = Math.abs(i - center);
+      // atraso maior quanto mais longe do centro (cria a sensação de onda)
+      const delay = (distanceFromCenter * stagger).toFixed(3);
+
+      span.style.animationDelay = `${delay}s`;
+      // opcional: variar levemente a duração pra ficar menos "mecânico"
+      const extra = ((Math.random() - 0.5) * 0.12).toFixed(3); // -0.06 .. +0.06
+      span.style.animationDuration = `${(totalDuration * (1 + parseFloat(extra))).toFixed(3)}s`;
+
+      frag.appendChild(span);
+    }
+
+    h.appendChild(frag);
+  })();
+</script>
+
+  <!-- fim do novo codigo  -->
+
+
+
+  <div class="contador" id="contador">
+    <div class="tempo"><span id="dias">0</span><small>Dias</small></div>
+    <div class="tempo"><span id="horas">0</span><small>Horas</small></div>
+    <div class="tempo"><span id="minutos">0</span><small>Minutos</small></div>
+    <div class="tempo"><span id="segundos">0</span><small>Segundos</small></div>
+  </div>
+
+  <!-- Player fofinho -->
+  <div class="player">
+    <img src="https://picsum.photos/200/200?random=1" alt="Capa da música">
+    <audio controls>
+      <source src="sound/untitled.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio.
+    </audio>
+  </div>
+
+  <!-- Botões de fundo -->
+  <div class="opcoes">
+    <button onclick="mudarFundo('linear-gradient(135deg,#f8e1f4,#e8d9ff)')">Roxo Pastel</button>
+    <button onclick="mudarFundo('linear-gradient(135deg,#ffd1e8,#ffe8f0)')">Rosa Pastel</button>
+    <button onclick="mudarFundo('linear-gradient(135deg,#d1f4ff,#f0faff)')">Azul Pastel</button>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- QUADRO DE FOTOS VERTICAL COM ROLAGEM TOUCH -->
+<div class="quadro-fotos">
+  <!-- título fofo -->
+  <div class="quadro-titulo">💕 Minhas Memórias com Você 💕</div>
+
+  <!-- imagens -->
+  <img src="img/1.jpeg" class="foto">
+  <img src="img/2.jpeg" class="foto">
+  <img src="img/3.jpeg" class="foto">
+  <img src="img/4.jpeg" class="foto">
+  <img src="img/5.jpeg" class="foto">
+
+  <!-- seta indicativa -->
+  <div class="seta">▼</div>
+</div>
+
+<style>
+/* container principal */
+.quadro-fotos {
+  position: relative;
+  width: 260px;
+  height: 360px;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  margin: 20px auto;
+  border: 2px solid #8098ff;
+  border-radius: 20px;
+  background: #111;
+  animation: neonSuave 12s infinite ease-in-out, onda 6s infinite ease-in-out;
+}
+
+/* título fixo no topo */
+.quadro-titulo {
+  position: sticky;
+  top: 0;
+  background: rgba(17, 17, 17, 0.0);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(80px);
+  text-align: center;
+  font-size: 10px;
+  font-family: 'Caviar Dreams', sans-serif;
+  font-weight: bold;
+  color: #fff;
+  padding: 8px;
+  border-radius: 18px 18px 0 0;
+  letter-spacing: 1px;
+  z-index: 2;
+}
+
+/* imagens */
+.foto {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  scroll-snap-align: start;
+}
+
+/* seta indicativa */
+.seta {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.7);
+  animation: bounce 1.2s infinite;
+  pointer-events: none;
+}
+
+/* animação seta */
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+
+/* efeito neon suave em tons pastéis de roxo e rosa */
+@keyframes neonSuave {
+  0% {
+    border-color: rgba(220, 180, 255, 0.8);
+    box-shadow: 0 0 8px rgba(220, 180, 255, 0.5),
+                0 0 18px rgba(220, 180, 255, 0.4);
+  }
+  25% {
+    border-color: rgba(240, 180, 220, 0.8);
+    box-shadow: 0 0 10px rgba(240, 180, 220, 0.5),
+                0 0 20px rgba(240, 180, 220, 0.4);
+  }
+  50% {
+    border-color: rgba(200, 160, 255, 0.8);
+    box-shadow: 0 0 12px rgba(200, 160, 255, 0.5),
+                0 0 22px rgba(200, 160, 255, 0.4);
+  }
+  75% {
+    border-color: rgba(255, 200, 230, 0.8);
+    box-shadow: 0 0 10px rgba(255, 200, 230, 0.5),
+                0 0 18px rgba(255, 200, 230, 0.4);
+  }
+  100% {
+    border-color: rgba(220, 180, 255, 0.8);
+    box-shadow: 0 0 8px rgba(220, 180, 255, 0.5),
+                0 0 18px rgba(220, 180, 255, 0.4);
+  }
+}
+
+/* efeito onda */
+@keyframes onda {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(0.3deg) translateY(2px); }
+  50% { transform: rotate(-0.3deg) translateY(-2px); }
+  75% { transform: rotate(0.2deg) translateY(1px); }
+}
+</style>
+
+  <!-- ========================================== -->
+
+  <!-- FIM GA GALERIA -->
+
+  <!-- Decoração de corações -->
+  <div class="decoracao" id="decoracao"></div>
+
+  <!-- Partículas -->
+  <canvas id="particulas"></canvas>
+
+  <script>
+    // ===== CONFIGURAÇÃO DA DATA INICIAL =====
+    const inicio = new Date("2025-06-14T00:00:00"); // Troque a data de início
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diferenca = agora - inicio;
+
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
+      const segundos = Math.floor((diferenca / 1000) % 60);
+
+      document.getElementById("dias").textContent = dias;
+      document.getElementById("horas").textContent = horas;
+      document.getElementById("minutos").textContent = minutos;
+      document.getElementById("segundos").textContent = segundos;
+    }
+
+    setInterval(atualizarContador, 1000);
+    atualizarContador();
+
+    // ===== CORAÇÕES FLUTUANTES =====
+    function criarCoracao() {
+      const cora = document.createElement("div");
+      cora.classList.add("cora");
+      cora.style.left = Math.random() * 100 + "vw";
+      cora.style.animationDuration = 4 + Math.random() * 4 + "s";
+      cora.innerHTML = "💜";
+      document.getElementById("decoracao").appendChild(cora);
+
+      setTimeout(() => {
+        cora.remove();
+      }, 8000);
+    }
+    setInterval(criarCoracao, 1200);
+
+    // ===== PARTÍCULAS =====
+    const canvas = document.getElementById("particulas");
+    const ctx = canvas.getContext("2d");
+    let particulas = [];
+
+    function redimensionarCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", redimensionarCanvas);
+    redimensionarCanvas();
+
+    class Particula {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.tamanho = Math.random() * 3 + 1;
+        this.velX = (Math.random() - 0.5) * 0.6;
+        this.velY = (Math.random() - 0.5) * 0.6;
+        this.cor = "rgba(164, 76, 194, 0.5)";
+      }
+      atualizar() {
+        this.x += this.velX;
+        this.y += this.velY;
+        if (this.x < 0 || this.x > canvas.width) this.velX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.velY *= -1;
+      }
+      desenhar() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.tamanho, 0, Math.PI * 2);
+        ctx.fillStyle = this.cor;
+        ctx.fill();
+      }
+    }
+
+    function inicializarParticulas() {
+      particulas = [];
+      for (let i = 0; i < 60; i++) {
+        particulas.push(new Particula());
+      }
+    }
+
+    function animar() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particulas.forEach(p => {
+        p.atualizar();
+        p.desenhar();
+      });
+      requestAnimationFrame(animar);
+    }
+
+    inicializarParticulas();
+    animar();
+
+    // ===== ALTERAR FUNDO =====
+    function mudarFundo(cor) {
+      document.body.style.background = cor;
+    }
+  </script>
+
+
+<!-- ===== Estilos e variáveis ===== -->
+
+<style>
+  :root{
+    --bg: #0a0a0a;
+    --card-bg: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    --accent: #b86bff;
+    --text: #464646ff;
+    --muted: #cbbfe6;
+    --font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;
+    --max-width: 900px;
+    --radius: 18px;
+    --padding: clamp(1rem, 3.5vw, 2.2rem);
+  }
+
+  /* Reset local */
+  *{box-sizing:border-box}
+
+  .wrapper{
+    width:100%;
+    max-width:var(--max-width);
+    margin-inline:auto;
+    padding:calc(var(--padding) * 0.6);
+    font-family:var(--font-family);
+  }
+
+  .card{
+    background:var(--card-bg);
+    border-radius:var(--radius);
+    padding:var(--padding);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.03);
+    overflow:hidden;
+    color:var(--text);
+  }
+
+  .mensagem{
+    padding: clamp(1rem, 3.5vw, 2rem);
+    border-radius: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    line-height:1.55;
+    font-size: clamp(1rem, 1.9vw, 1.18rem);
+  }
+
+  h1{
+    margin:0 0 0.6rem 0;
+    font-size: clamp(1.2rem, 3.3vw, 1.9rem);
+    letter-spacing: -0.4px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+
+  .accent{ color:var(--accent); font-weight:600; }
+
+  .footer{
+    margin-top:1rem;
+    color:var(--muted);
+    font-size:0.92rem;
+  }
+</style>
+
+<!-- ===== Estrutura HTML pronta para colar em qualquer lugar ===== -->
+<div class="wrapper">
+  <div class="card">
+    <h1>💜 <span class="accent">Meu Amor</span></h1>
+
+    <div class="mensagem">
+      <p><br>
+      eu só queria te lembrar o quanto você é especial pra mim. tu é a luz mais bonita que já entrou na minha vida, e todos os dias do teu lado se tornam mais leves, mais doces e mais felizes. 💫</p>
+
+      <p>O jeito que você sorri, que fala, que me olha… tudo em você me encanta. É como se o mundo tivesse criado a pessoa perfeita só pra mim. 💜</p>
+
+      <p>Eu tenho tanto orgulho de te chamar de minha namorada, de caminhar junto com você e de sonhar ao teu lado. Tu é meu porto seguro, meu motivo de paz e também a razão das minhas borboletas no estômago. 🦋</p>
+
+      <p>Te amo daqui até o infinito (e voltando mil vezes).</p>
+    </div>
+
+    <div class="footer">
+      Dica: experimente trocar as variáveis de cor em <code>:root</code> ou aplicar uma animação personalizada.
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>
