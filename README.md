@@ -1,2 +1,0 @@
-# teamo
-TEAMOO
