@@ -205,7 +205,7 @@
     transform-origin: center;
     /* animação muito suave: movimento vertical pequeno */
     animation-name: wave;
-    animation-duration: 2.8s;     /* duração total da onda */
+    animation-duration: 4.8s;     /* duração total da onda */
     animation-iteration-count: infinite;
     animation-timing-function: cubic-bezier(.42,.0,.58,1); /* suave */
     /* cada letra receberá um delay via JS para criar o efeito de onda */
@@ -299,9 +299,9 @@
 
   <!-- Botões de fundo -->
   <div class="opcoes">
-    <button onclick="mudarFundo('linear-gradient(135deg,#f8e1f4,#e8d9ff)')">Roxo Pastel</button>
-    <button onclick="mudarFundo('linear-gradient(135deg,#ffd1e8,#ffe8f0)')">Rosa Pastel</button>
-    <button onclick="mudarFundo('linear-gradient(135deg,#d1f4ff,#f0faff)')">Azul Pastel</button>
+    <button onclick="mudarFundo('linear-gradient(135deg,#f8e1f4,#e8d9ff)')">­</button>
+    <button onclick="mudarFundo('linear-gradient(135deg,#ffd1e8,#ffe8f0)')">­</button>
+    <button onclick="mudarFundo('linear-gradient(135deg,#d1f4ff,#f0faff)')">­</button>
   </div>
 
   <!-- ========================================== -->
@@ -430,7 +430,7 @@
 
   <script>
     // ===== CONFIGURAÇÃO DA DATA INICIAL =====
-    const inicio = new Date("2025-06-14T00:00:00"); // Troque a data de início
+    const inicio = new Date("2025-06-16T00:00:00"); // Troque a data de início
 
     function atualizarContador() {
       const agora = new Date();
@@ -610,6 +610,154 @@
   </div>
 </div>
 
+<!-- BLOCO FOFO INDEPENDENTE -->
+<div class="bloco-fofo-amor">
+
+  <div class="texto-fofo-onda custom-style">
+    <span>💜</span>
+    <span>Motivos pra te amar?</span>
+    <span>💜</span>
+  </div>
+
+  <div class="fofo-lista">
+    <ul>
+      <li>💜 porque no teu abraço eu encontro minha paz</li>
+      <li>💜 porque você me faz sorrir até quando estou triste</li>
+      <li>💜 pelo jeito especial que só você tem</li>
+      <li>💜 porque eu amo teu cabelo</li>
+      <li>💜 pelo teu sorriso</li>
+      <li>💜 tua voz</li>
+      <li>💜 teu toque</li>
+      <li>💜 teu beijo</li>
+      <li>💜 teus lindos olhos</li>
+      <li>💜 porque com você eu posso ser eu de verdade</li>
+      <li>💜 o jeito que você acorda toda perdidakkkk</li>
+      <li>💜 tua risada</li>
+      <li>💜 porque você é extremamente cheirosa</li>
+      <li>💜 teu caráter</li>
+      <li>💜 porque você me dá certeza</li>
+      <li>💜 o jeito que você anda</li>
+      <li>💜 porque você me apoia acima de tudo.</li>
+      <li>💜 Tudo me lembra você.</li>
+      <li>💜 Você faz tudo valer à pena.</li>
+      <li>💜 Você me ensinou o que é amar.</li>
+      <li>💜 Você é o amor da minha vida.</li>
+      <li>💜 Eu sonhei e esperei por você.</li>
+      <li>💜 Você me apoia.</li>
+      <li>💜 Você traz alegria pra minha vida.</li>
+      <li>💜 Amar você é a melhor coisa que eu sei fazer.</li>
+      <li>💜 Você me entende.</li>
+    </ul>
+  </div>
+
+  <h2 class="fofo-titulo">
+    Motivos é o que mais existe amor
+    <span class="emoji">💭</span>
+    <span class="star">😁</span>
+    <span class="star">💘</span>
+    <span class="star">💖</span>
+  </h2>
+
+</div>
+
+<!-- ESTILOS ISOLADOS -->
+<style>
+/* ===== Personalização texto inicial ===== */
+.custom-style {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.3rem; /* responsivo */
+  color: #d9a9ff;
+  animation: minhaAnimacao 6s infinite ease-in-out;
+  text-align: center;
+  display: block;
+  margin-bottom: 10px;
+}
+
+@keyframes minhaAnimacao {
+  0% { transform: scale(1); color: #d9a9ff; }
+  50% { transform: scale(1.1); color: #ffb3ff; }
+  100% { transform: scale(1); color: #d9a9ff; }
+}
+
+/* ===== Container principal ===== */
+.bloco-fofo-amor {
+  font-family: Arial, sans-serif;
+  color: #a65be4ff;
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px; /* limita em telas grandes */
+  padding: 0 10px;  /* respiro nas laterais no celular */
+}
+
+/* lista fofinha */
+.bloco-fofo-amor .fofo-lista {
+  background: linear-gradient(135deg,#b4b4b400,#ffffff00);
+  padding: 8px;
+  border-radius: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 10px auto;
+  text-shadow: 0 0 8px rgba(209, 73, 250, 0.7),
+               0 0 15px rgba(253, 253, 253, 0);
+}
+.bloco-fofo-amor .fofo-lista ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bloco-fofo-amor .fofo-lista li {
+  padding: 4px 0;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* título fofo */
+.bloco-fofo-amor .fofo-titulo {
+  display: inline-block;
+  font-size: 1.4rem;
+  padding: 12px 16px;
+  color: #a158f5fa;
+  text-shadow: 0 0 0px #aab5ff, 0 0 0px #ffccff;
+  animation: pulse-fofo 6s infinite ease-in-out;
+  position: relative;
+}
+
+/* animação suave */
+@keyframes pulse-fofo {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* partículas fofas */
+.bloco-fofo-amor .fofo-titulo span {
+  display: inline-block;
+  font-size: 1em;
+  animation: float-fofo 4s infinite ease-in-out;
+}
+@keyframes float-fofo {
+  0%   { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+  25%  { transform: translateY(-2px) rotate(5deg); opacity: 1; }
+  50%  { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+  75%  { transform: translateY(2px) rotate(-5deg); opacity: 1; }
+  100% { transform: translateY(0px) rotate(0deg); opacity: 0.7; }
+}
+
+/* estrelas brilhando */
+.bloco-fofo-amor .star {
+  color: #ff99cc;
+  text-shadow: 0 0 20px #ffb3e6, 0 0 10px #ffccf2;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 480px) {
+  .custom-style { font-size: 1.1rem; }
+  .bloco-fofo-amor .fofo-lista li { font-size: 0.8rem; }
+  .bloco-fofo-amor .fofo-titulo { font-size: 1.2rem; padding: 10px 12px; }
+}
+</style>
+<!-- FIM DO BLOCO FOFO -->
 
 
 </body>
