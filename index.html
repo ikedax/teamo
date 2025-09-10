@@ -895,29 +895,27 @@
 </script>
 
 <!-- DEGRADE ANIMADO -->
-<div class="fundo-blur">
-  <p><span class="texto1">Entre milhões de <strong>possibilidades no universo, meu If sempre escolhe você.</strong></span> 💭</p>
-  <p><span class="texto2">Se a vida fosse um algoritmo, você seria minha constante imutável (const amor = você).</span></p>
-  <p><span class="texto3">Você é o meu bug favorito, aquele que eu nunca quero corrigir.</span> 🐞❤️</p>
-  <p><span class="texto4">No banco de dados da minha vida, a chave primária sempre será você.</span> 🔑</p>
-  <p><span class="texto5">Se amor fosse código, o meu seria um loop infinito só por você.</span> ♾️</p>
-  <p><span class="texto6">Você é a sintaxe perfeita do meu coração.</span> 💻💕</p>
-  <p><span class="texto7">Meu sistema só funciona quando você está rodando nele.</span> ⚡</p>
-  <p><span class="texto8">Entre 0 e 1, você é sempre meu valor verdadeiro.</span> ✅</p>
-  <p><span class="texto9">Se eu tivesse 1 request ao universo, seria sempre você.</span> ✨</p>
-  <p><span class="texto10">Você é meu import mais essencial.</span> 📂❤️</p>
+<div>
+  <p class="fundo-blur"><span class="texto1">Entre milhões de <strong>possibilidades no universo, meu If sempre escolhe você.</strong></span> 💭</p>
+  <p class="fundo-blur"><span class="texto2">Se a vida fosse um algoritmo, você seria minha constante imutável (const amor = você).</span></p>
+  <p class="fundo-blur"><span class="texto3">Você é o meu bug favorito, aquele que eu nunca quero corrigir.</span> 🐞❤️</p>
+  <p class="fundo-blur"><span class="texto4">No banco de dados da minha vida, a chave primária sempre será você.</span> 🔑</p>
+  <p class="fundo-blur"><span class="texto5">Se amor fosse código, o meu seria um loop infinito só por você.</span> ♾️</p>
+  <p class="fundo-blur"><span class="texto6">Você é a sintaxe perfeita do meu coração.</span> 💻💕</p>
+  <p class="fundo-blur"><span class="texto7">Meu sistema só funciona quando você está rodando nele.</span> ⚡</p>
+  <p class="fundo-blur"><span class="texto8">Entre 0 e 1, você é sempre meu valor verdadeiro.</span> ✅</p>
+  <p class="fundo-blur"><span class="texto9">Se eu tivesse 1 request ao universo, seria sempre você.</span> ✨</p>
+  <p class="fundo-blur"><span class="texto10">Você é meu import mais essencial.</span> 📂❤️</p>
 </div>
 
 <style>
-  /* Fundo escuro translúcido com blur */
+  /* Fundo escuro translúcido com blur aplicado em cada parágrafo */
   .fundo-blur {
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    padding: 20px;
-    border-radius: 16px;
-    max-width: 600px;
-    margin: 20px auto;
+    padding: 12px 16px;
+    border-radius: 12px;
     border: 2px solid transparent;
     background-clip: padding-box, border-box;
     background-origin: border-box;
@@ -925,6 +923,10 @@
       linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), 
       linear-gradient(120deg, #66ccff, #ff66cc, #ffcc66, #9333ea, #00c9ff);
     animation: neonBorder 6s linear infinite;
+    margin: 12px auto;
+    max-width: 600px;
+    font-size: 1rem;
+    line-height: 1.5;
   }
 
   /* Animação da borda neon */
@@ -957,6 +959,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: fadeInUp 1.2s ease forwards, gradientMove 6s ease infinite;
+    word-break: break-word;
   }
 
   .texto1 { background-image: linear-gradient(270deg, #66ccff, #99ffcc, #ffcc66); animation-delay: 0.3s; }
@@ -969,6 +972,23 @@
   .texto8 { background-image: linear-gradient(270deg, #a1c4fd, #c2e9fb, #667eea); animation-delay: 2.4s; }
   .texto9 { background-image: linear-gradient(270deg, #f7971e, #ffd200, #ff9a00); animation-delay: 2.7s; }
   .texto10 { background-image: linear-gradient(270deg, #ff6a00, #ee0979, #ff6ec4); animation-delay: 3s; }
+
+  /* 📱 Responsividade */
+  @media (max-width: 768px) {
+    .fundo-blur {
+      max-width: 90%;
+      font-size: 0.95rem;
+      padding: 10px 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .fundo-blur {
+      max-width: 95%;
+      font-size: 0.9rem;
+      padding: 8px 12px;
+    }
+  }
 </style>
 
 
