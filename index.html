@@ -894,33 +894,36 @@
   });
 </script>
 
-<!-- DEGRADE ANIMADO -->
+<!-- TEXTO COM BLUR ESTILO iOS -->
 <div>
-  <p class="fundo-blur"><span class="texto1">Entre milhões de <strong>possibilidades no universo, meu If sempre escolhe você.</strong></span> 💭</p>
-  <p class="fundo-blur"><span class="texto2">Se a vida fosse um algoritmo, você seria minha constante imutável (const amor = você).</span></p>
-  <p class="fundo-blur"><span class="texto3">Você é o meu bug favorito, aquele que eu nunca quero corrigir.</span> 🐞❤️</p>
-  <p class="fundo-blur"><span class="texto4">No banco de dados da minha vida, a chave primária sempre será você.</span> 🔑</p>
-  <p class="fundo-blur"><span class="texto5">Se amor fosse código, o meu seria um loop infinito só por você.</span> ♾️</p>
-  <p class="fundo-blur"><span class="texto6">Você é a sintaxe perfeita do meu coração.</span> 💻💕</p>
-  <p class="fundo-blur"><span class="texto7">Meu sistema só funciona quando você está rodando nele.</span> ⚡</p>
-  <p class="fundo-blur"><span class="texto8">Entre 0 e 1, você é sempre meu valor verdadeiro.</span> ✅</p>
-  <p class="fundo-blur"><span class="texto9">Se eu tivesse 1 request ao universo, seria sempre você.</span> ✨</p>
-  <p class="fundo-blur"><span class="texto10">Você é meu import mais essencial.</span> 📂❤️</p>
+  <p class="fundo-ios"><span class="texto">Entre milhões de <strong>possibilidades no universo, meu If sempre escolhe você.</strong></span> 💭</p>
+  <p class="fundo-ios"><span class="texto">Se a vida fosse um algoritmo, você seria minha constante imutável (const amor = você).</span></p>
+  <p class="fundo-ios"><span class="texto">Você é o meu bug favorito, aquele que eu nunca quero corrigir.</span> 🐞❤️</p>
+  <p class="fundo-ios"><span class="texto">No banco de dados da minha vida, a chave primária sempre será você.</span> 🔑</p>
+  <p class="fundo-ios"><span class="texto">Se amor fosse código, o meu seria um loop infinito só por você.</span> ♾️</p>
+  <p class="fundo-ios"><span class="texto">Você é a sintaxe perfeita do meu coração.</span> 💻💕</p>
+  <p class="fundo-ios"><span class="texto">Meu sistema só funciona quando você está rodando nele.</span> ⚡</p>
+  <p class="fundo-ios"><span class="texto">Entre 0 e 1, você é sempre meu valor verdadeiro.</span> ✅</p>
+  <p class="fundo-ios"><span class="texto">Se eu tivesse 1 request ao universo, seria sempre você.</span> ✨</p>
+  <p class="fundo-ios"><span class="texto">Você é meu import mais essencial.</span> 📂❤️</p>
 </div>
 
 <style>
-  /* Fundo escuro translúcido com blur aplicado em cada parágrafo */
-  .fundo-blur {
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    padding: 10px 14px;
-    border-radius: 12px;
-    margin: 12px auto;
+  /* Fundo estilo iOS (vidro fosco translúcido) */
+  .fundo-ios {
+    background: rgba(255, 255, 255, 0.5); /* fundo claro e translúcido */
+    backdrop-filter: blur(9px) saturate(180%);
+    -webkit-backdrop-filter: blur(80px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* borda sutil */
+    padding: 12px 16px;
+    border-radius: 18px;
+    margin: 14px auto;
     max-width: 600px;
     font-size: 0.95rem;
-    line-height: 1.4;
+    line-height: 1.5;
     text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* sombra leve */
+    animation: fadeInUp 1.2s ease forwards;
   }
 
   /* Animação de entrada */
@@ -929,59 +932,37 @@
     100% { opacity: 1; transform: translateY(0); }
   }
 
-  /* Animação de degradê */
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Efeito de texto com degradê animado */
-  .texto1, .texto2, .texto3, .texto4, .texto5,
-  .texto6, .texto7, .texto8, .texto9, .texto10 {
+  /* Texto com cor escura para contraste no fundo iOS */
+  .texto {
+    color: #1a1a1a;
+    text-shadow: none;
     display: inline-block;
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: fadeInUp 1.2s ease forwards, gradientMove 6s ease infinite;
-    word-break: break-word;
-    transition: transform 0.3s ease; /* 🔽 Suavidade no hover */
+    transition: transform 0.3s ease;
   }
 
-  /* 🔍 Efeito de zoom suave no hover */
-  .texto1:hover, .texto2:hover, .texto3:hover, .texto4:hover, .texto5:hover,
-  .texto6:hover, .texto7:hover, .texto8:hover, .texto9:hover, .texto10:hover {
+  /* Zoom suave no hover */
+  .texto:hover {
     transform: scale(1.08);
   }
 
-  .texto1 { background-image: linear-gradient(270deg, #66ccff, #99ffcc, #ffcc66); animation-delay: 0.3s; }
-  .texto2 { background-image: linear-gradient(270deg, #a3e635, #ffdd55, #ff66aa); animation-delay: 0.6s; }
-  .texto3 { background-image: linear-gradient(270deg, #ff66cc, #ff99ff, #66ccff); animation-delay: 0.9s; }
-  .texto4 { background-image: linear-gradient(270deg, #ff7eb9, #ff65a3, #7afcff); animation-delay: 1.2s; }
-  .texto5 { background-image: linear-gradient(270deg, #c084fc, #9333ea, #ec4899); animation-delay: 1.5s; }
-  .texto6 { background-image: linear-gradient(270deg, #00c9ff, #92fe9d, #f9d423); animation-delay: 1.8s; }
-  .texto7 { background-image: linear-gradient(270deg, #ff9a9e, #fad0c4, #fad0c4); animation-delay: 2.1s; }
-  .texto8 { background-image: linear-gradient(270deg, #a1c4fd, #c2e9fb, #667eea); animation-delay: 2.4s; }
-  .texto9 { background-image: linear-gradient(270deg, #f7971e, #ffd200, #ff9a00); animation-delay: 2.7s; }
-  .texto10 { background-image: linear-gradient(270deg, #ff6a00, #ee0979, #ff6ec4); animation-delay: 3s; }
-
   /* 📱 Responsividade */
   @media (max-width: 768px) {
-    .fundo-blur {
+    .fundo-ios {
       max-width: 90%;
       font-size: 0.9rem;
-      padding: 8px 12px;
+      padding: 10px 14px;
     }
   }
 
   @media (max-width: 480px) {
-    .fundo-blur {
+    .fundo-ios {
       max-width: 95%;
       font-size: 0.85rem;
-      padding: 6px 10px;
+      padding: 8px 12px;
     }
   }
 </style>
+
 
 
 
